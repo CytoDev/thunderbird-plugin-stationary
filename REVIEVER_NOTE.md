@@ -1,11 +1,12 @@
 # Reviewer note
-## Building the XPI:
- 1. check out sources from git
- 2. enter the git repository
- 3. execute `gradlew build`
- 4. the built XPI will land in the 'build' directory
-
+## Building
 Stationery uses the Gradle build system; a working Java JRE is required for Gradle.
+
+ 1. check the sources out from git
+ 2. enter the git repository
+ 3. execute `gradlew build`  
+    the built XPI will land in the 'build' directory
+ 4. `gradlew cleanDownloads` or `gradlew cleanAll` to remove downloaded files
 
 Sources are available at https://github.com/arivald/tbirdExt
 
