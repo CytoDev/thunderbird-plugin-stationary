@@ -3,28 +3,31 @@ import de.undercouch.gradle.tasks.download.Download
 plugins {
     id "de.undercouch.download" version "3.2.0"
 }
+
 apply plugin: 'de.undercouch.download'
 
 group 'arivald'
-version '1.0.0'
+version '1.1.0'
 
 def aceVersion = '1.2.8'
 
 ///////////////////////////////////////////////
 //No configuration below
 
-def xpiFilename = 'stationery-' + project.version + '.xpi'
-def aceDependencyDir = buildDir.absolutePath + '/dependency/ace/'
-def aceUrl = 'https://github.com/ajaxorg/ace-builds/archive/v' + aceVersion + '.zip'
-def aceZip = file(aceDependencyDir + 'v' + aceVersion + '.zip')
-def aceDir = file(aceDependencyDir + 'v' + aceVersion)
-def aceBuildDest = file('src/chrome/content/ace')
-def stationerySrcDir = file('src')
+def xpiFilename          = 'stationery-' + project.version + '.xpi'
+def aceDependencyDir     = buildDir.absolutePath + '/dependency/ace/'
+def aceUrl               = 'https://github.com/ajaxorg/ace-builds/archive/v' + aceVersion + '.zip'
+def aceZip               = file(aceDependencyDir + 'v' + aceVersion + '.zip')
+def aceDir               = file(aceDependencyDir + 'v' + aceVersion)
+def aceBuildDest         = file('src/chrome/content/ace')
+def stationerySrcDir     = file('src')
 def babelzillaLocalesDir = file('resources/babelzilla/Stationery_selected_locales_replaced')
 
 task downloadAce(type: Download) {
     src aceUrl
+
     file(aceDependencyDir).mkdirs()
+
     dest aceZip
 }
 
@@ -34,6 +37,7 @@ task unpackAce(type: Copy) {
     }
 
     from zipTree(aceZip)
+
     into aceDir
 }
 
@@ -90,7 +94,6 @@ task buildAce(type: Copy) {
         include 'worker-html.js'
         include 'snippets/html.js'
 
-        //patches
         filter { line ->
             line.replace(
                     'function(e,t){var n=this.$foldData,r=!1,o;e instanceof s?o=e:(o=new s(t,e),o.collapseChildren=t.collapseChildren),this.$clipRangeToDocument(o.range);',
@@ -98,6 +101,7 @@ task buildAce(type: Copy) {
                     'function(e,t){var n=this.$foldData,r=!1,o;e instanceof s?o=e:(o=new s(t,e),o.collapseChildren=t.collapseChildren),t&&t.placeholder&&(o.placeholder=t.placeholder),this.$clipRangeToDocument(o.range);'
             )
         }
+
         filter { line ->
             line.replace(
                     'return t.walk(function(e,t,o,u,a){e!=null?r.push({type:"fold",value:e}):(a&&(s=n.getTokens(t)),s.length&&i(s,u,o))},t.end.row,this.session.getLine(t.end.row).length),r},',
@@ -106,12 +110,15 @@ task buildAce(type: Copy) {
             )
         }
     }
+
     into file(aceBuildDest)
 
     doFirst {
         println 'aceDirBuild: ' + aceDirBuild.absolutePath
         println 'aceBuildDest: ' + aceBuildDest.absolutePath
+
         aceBuildDest.delete()
+
         aceBuildDest.mkdirs()
     }
 }
@@ -127,28 +134,32 @@ task buildXpiFile(type: Zip) {
         include '**/*'
         exclude 'chrome/locale/*'
     }
+
     from(babelzillaLocalesDir) {
         include '*/stationery.dtd'
         include '*/stationery.properties'
         include '*/SyntaxPreview.html'
         into 'chrome/locale/'
     }
+
     destinationDir buildDir
+
     archiveName xpiFilename
 
     doFirst {
         println 'bundleArchiveName: ' + archiveName
     }
-
 }
 
 task clean(type: Delete) {
     delete buildDir
+
     followSymlinks = false
 }
 
 task cleanDownloads(type: Delete) {
     delete aceDependencyDir
+
     followSymlinks = false
 }
 
@@ -169,11 +180,12 @@ task buildSourcesZipFile(type: Zip) {
 
         into 'stationery-' + project.version + '-sources'
     }
+
     destinationDir buildDir
+
     archiveName 'stationery-' + project.version + '-sources.zip'
 }
 
 task build {
     dependsOn buildXpiFile
 }
-
