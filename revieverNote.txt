@@ -1,9 +1,20 @@
-Stationery uses Gradle build system.
-Sources are available at https://github.com/arivald/tbirdExt
-To build XPI you have to checkout soures, then just enter the /stationery directory, then type `gradlew build` to build XPI. Built XPI will land in /stationery/build directory.
-Working Java JRE is required for Gradle.
+# Reviewer note
+## Building the XPI:
+ 1. check out sources from git
+ 2. enter the git repository
+ 3. execute `gradlew build`
+ 4. the built XPI will land in the 'build' directory
 
-Stationery uses the Ace editor, https://ace.c9.io/, https://github.com/ajaxorg/ace.
-Current version of Stationery uses the 1.2.8 version of Ace, direct link: https://github.com/ajaxorg/ace-builds/archive/v1.2.8.zip. The JavaScript files are already minified, I choose the "src-min-noconflict" version.
-The "buildAce" build task will download Ace, then it copy small subset of required files from the /src-min-noconflict into /stationery/src/chrome/content/ace directory, modifying the ace.js on the fly. The modification is to allow custom folds, feature that I require to fold images data: URLs. You can clearly see what is added, I put ↓↓↓ over added fragment.
-There is no change in this matter since last version (except added ↓↓↓).
+Stationery uses the Gradle build system; a working Java JRE is required for Gradle.
+
+Sources are available at https://github.com/arivald/tbirdExt
+
+## Third-party tools
+Stationery uses the [Ace editor](https://ace.c9.io/), ([source](https://github.com/ajaxorg/ace)). The current version of
+Stationery uses the [1.2.8 version of Ace](https://github.com/ajaxorg/ace-builds/archive/v1.2.8.zip). The JavaScript
+files are already minified, I choose the "src-min-noconflict" version. The "buildAce" build task will download Ace, then
+copy a small subset of required files from the 'src-min-noconflict' into 'src/chrome/content/ace' directory, modifying
+the ace js files on the fly. The modifications that are made are to allow custom folds, a feature that I require to fold
+images data URLs.
+
+You can clearly see what is added, I have put ↓↓↓ over the added fragment.
