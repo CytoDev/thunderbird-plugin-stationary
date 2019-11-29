@@ -6,10 +6,9 @@ description:  CSS for composer, platform UNIX
 ******************************************************************************/
 
 #stationery-content-tab {
-  padding: 0px 5px 0px 5px;
+    padding : 0 5px;
 }
 
-#stationery-content-tab tab{
-  padding: 1px 8px 1px 8px;
+#stationery-content-tab tab {
+    padding : 1px 8px 1px 8px;
 }
-

@@ -5,7 +5,6 @@ author: Łukasz 'Arivald' Płomiński <arivald@interia.pl>
 description: CSS for composer, all platforms
 ******************************************************************************/
 
-
 #stationery-composer-change-stationery {
-  list-style-image: url("chrome://stationery/skin/menu_icon.png");
+    list-style-image : url("chrome://stationery/skin/menu_icon.png");
 }

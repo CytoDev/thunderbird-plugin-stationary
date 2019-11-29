@@ -5,12 +5,12 @@ author: Łukasz 'Arivald' Płomiński <arivald@interia.pl>
 description:  CSS for composer, platform MAC
 ******************************************************************************/
 
-#stationery-content-tab tab{
-  margin-bottom: 3px !important;
+#stationery-content-tab tab {
+    margin-bottom : 3px !important;
 }
 
 #stationery-content-tab > tabs {
-  padding: 0px !important;
-  margin-bottom: 0px !important;
-  position: static !important;
+    padding       : 0 !important;
+    margin-bottom : 0 !important;
+    position      : static !important;
 }
